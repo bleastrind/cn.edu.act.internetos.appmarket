@@ -3,6 +3,7 @@ This is the appmarket for InternetOS project
 The appmarket allow users to install their favourate applications, thereby facilitating their online experience.
 Advanced user can add new applications to the market by specifying some infos about existing applications on the Internet.
 
+<<<<<<< HEAD
 test
 
 test
@@ -14,3 +15,6 @@ test
 test
 
 test
+=======
+test online by "edit this file"
+>>>>>>> a35d8e205e73255be9993d9908ef58dd63e30e30
