@@ -1,0 +1,23 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+<h1>Hello ${user.name}!</h1>
+#{if applist.size()}
+    <h3>Your apps:<h3>
+    #{list items: applist, as:'app'}
+            <div class="app">
+                <div class="app-title">
+                    <h4>${applist.indexOf(app)}.${app.name}</h4>
+                </div>
+                <div class="app-info">
+                    ${app.information}
+                </div>
+            </div>
+    #{/list}
+
+#{/if}
+#{else}
+    <h3>You've got no apps!<h3>
+#{/else}
+
+<button href = "@Application.AddApp(applist)">Add a new app!</button>
