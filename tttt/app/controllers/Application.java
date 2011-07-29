@@ -36,11 +36,23 @@ public class Application extends Controller {
         render(user, applist);
     }
 
-/*    public static void AddApp(List<App> nowapp)
+    public static void AddApp(List<App> nowapp)
     {
         AppDao appdao = new AppDao();
-        List<App> toaddapplist;
-        List<App> allapp;
+        List<App> toaddapplist = new ArrayList<App>(); 
+        List<App> allapp = appdao.getAllApps();
+        
+        for (int i = 0; i < allapp.size(); i++)
+        {
+            boolean flag = true;
+            for (int j = 0; j < nowapp.size(); j++)
+                if (allapp.get(i).id == nowapp.get(j).id)
+                    flag = false;
+            if (flag)
+                toaddapplist.add(allapp.get(i));
+        }
+        render(toaddapplist);
+           
     }
-*/
+
 }

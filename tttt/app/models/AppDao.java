@@ -3,7 +3,7 @@ package models;
  * class for AppDao with some methods
  */
 
-
+import java.util.*;
 import static me.prettyprint.hector.api.factory.HFactory.createColumn;
 import static me.prettyprint.hector.api.factory.HFactory.createColumnQuery;
 import static me.prettyprint.hector.api.factory.HFactory.createKeyspace;
@@ -53,7 +53,8 @@ public class AppDao {
 		}
 	}
 	
-	public void delete(App instance){
+
+public void delete(App instance){
 		log.debug("deleting App instance"); 
 		try{
 			 MutationResult mr = m.delete(instance.getId(), cf,
@@ -72,9 +73,10 @@ public class AppDao {
 		 }
 	}
 	
-	public String getAllApps(){
+	public List<App> getAllApps(){
 		//System.out.println("nihao!");ÓÐ´ýÍêÉÆ£¡
-		return "nihao";		
+            List<App> list = new ArrayList<App>(); 
+		return list ;		
 	}
 	
 	public App findById(String id){

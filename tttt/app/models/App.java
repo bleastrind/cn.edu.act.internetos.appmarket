@@ -8,9 +8,9 @@ package models;
 public class App {
 	//Fields
 	
-	private String id;
-	private String name;
-	private String information;
+	public String id;
+	public String name;
+	public String information;
 	
 	//Construcors
 	public App(){
