@@ -42,5 +42,8 @@ public class UserSpace {
 	public void setAppIds(String appid){
 		this.AppIds.add(appid);
 	}
+	public void setAppIds(List<String> list){
+		this.AppIds = list;
+	}
 	
 }

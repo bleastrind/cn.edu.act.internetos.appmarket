@@ -62,9 +62,8 @@ public class UserSpaceDao {
 			UserSpace instance = new UserSpace();
 			instance.setId(user.getId());
 		    List<String> list = stringToList(c.getValue());
-		    instance.setAppIds(c.getValue());//get the appid!
-		    System.out.println(instance.getAppIds());
-		    System.out.println(list);
+		    instance.setAppIds(list);//get the appid!
+			
 		    return instance;
 		}catch(RuntimeException re){
 			log.debug("get failed");
