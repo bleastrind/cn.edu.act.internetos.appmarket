@@ -1,22 +1,32 @@
-package models;
+//package models;
 /*
  * User is a class of the User and for UserDao;
  */
 
 public class User {
 	//Fields
+	
 	public String id;
 	public String account;
 	public String password;
 	public String name;
-	public String information;
+
 	
 	//Constructors
 	public User(){
 		
 	}
+	public User(String id, String account){
+		this.id = id;
+		this.account = account;		
+	}
+	public User(String id, String account, String password){
+		this.id = id;
+		this.account = account;
+		this.password = password;
+	}
 	
-	public User(String id, String accoutor, String password, String name){
+	public User(String id, String account, String password, String name){
 		this.id = id;
 		this.account = account;
 		this.password = password;
@@ -52,10 +62,4 @@ public class User {
 		this.name = name;
 	}
 	
-	public String getInformation(){
-		return this.information;
-	}
-	public void setInformation(String information){
-		this.information = information;
-	} 
 }

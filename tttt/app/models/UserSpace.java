@@ -1,4 +1,4 @@
-package models;
+//package models;
 import java.io.*;
 import java.util.List;
 import java.util.*;
@@ -9,15 +9,26 @@ import java.util.*;
 public class UserSpace {
 	//Fields
 	
-	private String id;
-      public List<String> AppIds;
+	public String id;
+    public List<String> AppIds = new ArrayList<String>();
 
+    //Constructors
+    public UserSpace(){
+    	
+    }
+    
 	public UserSpace(String id){
 		this.id = id;
-            AppIds = new ArrayList<String>();
+        //AppIds = new ArrayList<String>();
+	}
+	
+	public UserSpace(String id, List<String> AppIds){
+		this.id = id;
+		this.AppIds = AppIds;
 	}
 	
 	//Property Accessors
+	
 	public String getId(){
 		return this.id;
 	}
@@ -25,6 +36,11 @@ public class UserSpace {
 		this.id = id;
 	}
 	
-
+	public List<String> getAppIds(){
+		return this.AppIds;
+	}
+	public void setAppIds(String appid){
+		this.AppIds.add(appid);
+	}
 	
 }

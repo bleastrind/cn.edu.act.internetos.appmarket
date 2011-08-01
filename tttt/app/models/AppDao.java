@@ -1,9 +1,10 @@
-package models;
+//package models;
 /*
  * class for AppDao with some methods
  */
 
 import java.util.*;
+
 import static me.prettyprint.hector.api.factory.HFactory.createColumn;
 import static me.prettyprint.hector.api.factory.HFactory.createColumnQuery;
 import static me.prettyprint.hector.api.factory.HFactory.createKeyspace;
@@ -23,30 +24,31 @@ import me.prettyprint.hector.api.query.QueryResult;
 import me.prettyprint.cassandra.serializers.StringSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 public class AppDao {
 	final static String KEYSPACE = "Keyspace1";
 	static final StringSerializer se = new StringSerializer();
+	static final Logger log = LoggerFactory.getLogger(AppDao.class);
+	
 	Cluster cluster = getOrCreateCluster("Test Cluster", "127.0.0.1:9160");;
 	Keyspace ko = createKeyspace(KEYSPACE, cluster);
-	Mutator<String> m = createMutator(ko,se);
 	String cf = "AppTestTable";
-	static final Logger log = LoggerFactory.getLogger(AppDao.class);
+	
+	Mutator<String> m = createMutator(ko,se);
+	
 	public void save(App instance){
 		log.debug("saving App instance");
 		try{
 			
-			//cluster = getOrCreateCluster("Test Cluster", "127.0.0.1:9160");
-		    //ko = createKeyspace(KEYSPACE, cluster);
-			//Mutator<String> m = createMutator(ko,se);
-		    //HFactory t = new HFactory();
-		    //t.createColumnFamilyDefinition("Key","testTable2");
-		  MutationResult mr = m.insert(instance.getId(), cf, createColumn(instance.getName(),instance.getInformation(),se,se));
-		  log.debug("insert execution time: {}", mr.getExecutionTimeMicro());
-		  MutationResult mr2 = m.insert(instance.getId(), cf, createColumn("column_name",instance.getName(),se,se));
-		  log.debug("insert execution time: {}", mr.getExecutionTimeMicro());
-		 // MutationResult mr3 = m.insert(instance.getId(), cf, createColumn("column_information",instance.getInformation(),se,se));
-		  //log.debug("insert execution time: {}", mr.getExecutionTimeMicro());
-		  log.debug("save successful");
+			MutationResult mr = m.insert(instance.getId(), cf, createColumn("column_name",instance.getName(),se,se));
+			log.debug("insert execution time: {}", mr.getExecutionTimeMicro());
+			MutationResult mr2 = m.insert(instance.getId(), cf, createColumn("column_info",instance.getInformation(),se,se));
+			log.debug("insert execution time: {}", mr2.getExecutionTimeMicro());
+			MutationResult mr3 = m.insert(instance.getName(), cf, createColumn("name_info",instance.getInformation(),se,se));
+			log.debug("insert execution time: {}", mr3.getExecutionTimeMicro());
+			MutationResult mr4 = m.insert("allAppIds", cf, createColumn("AppIds",listToString(instance.getAppIds()),se,se));
+			log.debug("insert execution time: {}", mr4.getExecutionTimeMicro());
+			log.debug("save successful");
 		}catch(RuntimeException re){
 			log.error("save failed",re);
 			throw re;
@@ -57,71 +59,90 @@ public class AppDao {
 public void delete(App instance){
 		log.debug("deleting App instance"); 
 		try{
-			 MutationResult mr = m.delete(instance.getId(), cf,
-				        instance.getName(), se);
-			 ColumnQuery<String, String, String> q2 = createColumnQuery(ko, se, se, se);
-			    q2.setName(instance.getName()).setColumnFamily(cf);
-			    QueryResult<HColumn<String, String>> r2 = q2.setKey(instance.getId())
-			        .execute();
-			    assertNotNull(r2);
-			    System.out.println(r2);
-			    assertNull("Value should have been deleted", r2.get());
+			MutationResult mr = m.delete(instance.getId(), cf,
+					"column_name", se);
+			MutationResult mr2 = m.delete(instance.getId(), cf,
+					"column_info", se);
+			MutationResult mr3 = m.delete(instance.getId(), cf,
+					"name_info", se);
+			MutationResult mr4 = m.delete("allAppIds", cf,
+					"AppIds", se);
+			ColumnQuery<String, String, String> q2 = createColumnQuery(ko, se, se, se);
+			q2.setName(instance.getName()).setColumnFamily(cf);
+			QueryResult<HColumn<String, String>> r2 = q2.setKey(instance.getId())
+			    .execute();
+			assertNotNull(r2);
+			assertNull("Value should have been deleted", r2.get());
 			
-		 }catch(RuntimeException re){
-			 log.error("deleting failed",re);
+		}catch(RuntimeException re){
+			log.error("deleting failed",re);
 				throw re;
-		 }
+		}
 	}
 	
-	public List<App> getAllApps(){
-		//System.out.println("nihao!");有待完善！
-            List<App> list = new ArrayList<App>(); 
+	public List<String> getAllAppIds(){
+		List<String> list = new ArrayList<String>();
+
+		ColumnQuery<String, String, String> q = createColumnQuery(ko, se, se, se);
+	    q.setName("AppIds");
+	    q.setColumnFamily(cf);
+	    QueryResult<HColumn<String, String>> r = q.setKey("allAppIds")
+	        .execute();
+	    assertNotNull(r);
+	    HColumn<String, String> c = r.get();
+	    assertNotNull(c);
+	    list = stringToList(c.getValue());
+
 		return list ;		
 	}
 	
 	public App findById(String id){
 		log.debug("getting App instance with id:"+id);
 		try{
-			//String cf = "AppTestTable";
-			App instance = new App();
-			instance.setId(id);
-			//instance.setName(name);
+			//The first Query,the name
 			ColumnQuery<String, String, String> q = createColumnQuery(ko, se, se, se);
 		    q.setName("column_name");
 		    q.setColumnFamily(cf);
-		    QueryResult<HColumn<String, String>> r = q.setKey(instance.getId())
+		    QueryResult<HColumn<String, String>> r = q.setKey(id)
 		        .execute();
 		    assertNotNull(r);
-
 		    HColumn<String, String> c = r.get();
 		    assertNotNull(c);
-		    instance.setInformation(c.getValue());
 		    
-		    //第二次查询
-		    //ColumnQuery<String, String, String> q2 = createColumnQuery(ko, se, se, se);
-		    q.setName(instance.getInformation());
-		    QueryResult<HColumn<String, String>> r2 = q.setKey(instance.getId())
+		    //the second Query,the information
+		    q.setName("column_info");
+		    QueryResult<HColumn<String, String>> r2 = q.setKey(id)
 	        .execute();
-	    assertNotNull(r2);
+			assertNotNull(r2);
+			HColumn<String, String> c2 = r2.get();
+			assertNotNull(c2);
+		
+			//put the parameters to the App class
+			App instance = new App();
+			instance.setId(id);
+			instance.setName(c.getValue());
+			instance.setInformation(c2.getValue());
 
-	    HColumn<String, String> c2 = r2.get();
-	    assertNotNull(c2);
-	    System.out.println(c2);
-	    System.out.println("Key:"+id);
-	    instance.setInformation(c2.getValue());
-	    instance.setName(c2.getName());
-		    //String name = c.getName();
-		    //assertEquals(instance.getName(), name);
-		    //System.out.println("Key_name:"+name);
-		    System.out.println("App_name:"+instance.getName());
-		    System.out.println("App_information:"+instance.getInformation());
-		    //System.out.println(r.get());
-		    assertEquals(q, r.getQuery());
-		    return instance;
+			return instance;
 		}catch(RuntimeException re){
 			log.error("get failed",re);
 			throw re;
 		}
+	}
+	
+	String listToString(List<String> list){
+		String str = "";
+		for(String i:list){
+			str += i + ",";
+		}
+		return str;
+	}
 
+	List<String> stringToList(String str){
+		List<String> list = new ArrayList<String>();
+		for(String i:str.split(",")){
+			list.add(i);
+		}
+		return list;
 	}
 }
