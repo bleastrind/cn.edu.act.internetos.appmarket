@@ -13,4 +13,11 @@ public class Application extends Controller {
         render();
     }
 
+    public static void login() {
+        render();
+    }
+
+    public static void getAccount() {
+
+    }
 }

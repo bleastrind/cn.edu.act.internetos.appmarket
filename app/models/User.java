@@ -1,13 +1,15 @@
+package models;
 /*
  * User is a class of the User and for UserDao;
  */
+
 public class User {
 	//Fields
-	private String id;
-	private String account;
-	private String password;
-	private String name;
-	private String information;
+	public String id;
+	public String account;
+	public String password;
+	public String name;
+	public String information;
 	
 	//Constructors
 	public User(){

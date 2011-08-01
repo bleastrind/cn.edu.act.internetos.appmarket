@@ -1,6 +1,9 @@
+package models;
 /*
  * class for AppDao with some methods
  */
+
+import java.util.*;
 import static me.prettyprint.hector.api.factory.HFactory.createColumn;
 import static me.prettyprint.hector.api.factory.HFactory.createColumnQuery;
 import static me.prettyprint.hector.api.factory.HFactory.createKeyspace;
@@ -10,7 +13,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import me.prettyprint.cassandra.serializers.StringSerializer;
-import me.prettyprint.hector.api.ApiV2SystemTest;
 import me.prettyprint.hector.api.Cluster;
 import me.prettyprint.hector.api.Keyspace;
 import me.prettyprint.hector.api.beans.HColumn;
@@ -18,7 +20,6 @@ import me.prettyprint.hector.api.mutation.MutationResult;
 import me.prettyprint.hector.api.mutation.Mutator;
 import me.prettyprint.hector.api.query.ColumnQuery;
 import me.prettyprint.hector.api.query.QueryResult;
-import me.prettyprint.cassandra.BaseEmbededServerSetupTest;
 import me.prettyprint.cassandra.serializers.StringSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,7 +53,8 @@ public class AppDao {
 		}
 	}
 	
-	void delete(App instance){
+
+public void delete(App instance){
 		log.debug("deleting App instance"); 
 		try{
 			 MutationResult mr = m.delete(instance.getId(), cf,
@@ -71,12 +73,13 @@ public class AppDao {
 		 }
 	}
 	
-	String getAllApps(){
+	public List<App> getAllApps(){
 		//System.out.println("nihao!");ÓÐ´ýÍêÉÆ£¡
-		return "nihao";		
+            List<App> list = new ArrayList<App>(); 
+		return list ;		
 	}
 	
-	App findById(String id){
+	public App findById(String id){
 		log.debug("getting App instance with id:"+id);
 		try{
 			//String cf = "AppTestTable";

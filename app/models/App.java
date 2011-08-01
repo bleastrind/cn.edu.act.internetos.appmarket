@@ -2,12 +2,15 @@
 /*
  * App is a class of the Application and for AppDao;
  */
+
+package models;
+
 public class App {
 	//Fields
 	
-	private String id;
-	private String name;
-	private String information;
+	public String id;
+	public String name;
+	public String information;
 	
 	//Construcors
 	public App(){

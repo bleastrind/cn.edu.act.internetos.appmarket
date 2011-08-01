@@ -1,3 +1,5 @@
+package models;
+
 import static me.prettyprint.hector.api.factory.HFactory.createColumn;
 import static me.prettyprint.hector.api.factory.HFactory.createColumnQuery;
 import static me.prettyprint.hector.api.factory.HFactory.createKeyspace;
@@ -29,7 +31,7 @@ public class UserDao {
 	String cf = "UserTestTable";
 	static final Logger log = LoggerFactory.getLogger(UserDao.class);
 	
-	void save(User instance){
+	public void save(User instance){
 		log.debug("saving User instance");
 		try{
 			  MutationResult mr = m.insert(instance.getId(), cf, createColumn("column_name",instance.getName(),se,se));
@@ -50,7 +52,7 @@ public class UserDao {
 		}
 	}
 	
-	void delete(User instance){
+	public void delete(User instance){
 		log.debug("deleting User instance"); 
 		try{
 			 MutationResult mr = m.delete(instance.getAccount(), cf,
@@ -80,7 +82,7 @@ public class UserDao {
 		 }
 	}
 	
-	User findByAccount(String account){
+public User findByAccount(String account){
 		log.debug("find a user");
 		try{
 			//At first,searching the id through the account

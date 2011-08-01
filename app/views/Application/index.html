@@ -1,4 +1,7 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-#{welcome /}
+<h1>Welcome to the AppMarket!</h1>
+<h3>You can get nice appliacations here~</h3>
+<h5><a href = "@{Application.login()}">Click me to login!</a></h5>
+<h5><a href = "@{UserService.regesiter()}">Click me to regist!</a></h5>
