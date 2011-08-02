@@ -69,7 +69,9 @@ public class AppDao {
 					"column_info", se);
 			MutationResult mr3 = m.delete(instance.getId(), cf,
 					"name_info", se);
-					
+			
+			AppIds.remove(instance.getId());
+			MutationResult mr4 = m.insert("allAppIds", cf, createColumn("AppIds",listToString(AppIds),se,se));			
 			ColumnQuery<String, String, String> q2 = createColumnQuery(ko, se, se, se);
 			q2.setName(instance.getName()).setColumnFamily(cf);
 			QueryResult<HColumn<String, String>> r2 = q2.setKey(instance.getId())
