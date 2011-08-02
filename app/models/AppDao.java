@@ -69,8 +69,7 @@ public void delete(App instance){
 					"column_info", se);
 			MutationResult mr3 = m.delete(instance.getId(), cf,
 					"name_info", se);
-			MutationResult mr4 = m.delete("allAppIds", cf,
-					"AppIds", se);
+					
 			ColumnQuery<String, String, String> q2 = createColumnQuery(ko, se, se, se);
 			q2.setName(instance.getName()).setColumnFamily(cf);
 			QueryResult<HColumn<String, String>> r2 = q2.setKey(instance.getId())
