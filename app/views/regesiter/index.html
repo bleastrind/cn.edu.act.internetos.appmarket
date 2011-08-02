@@ -1,0 +1,38 @@
+#{extends 'main.html' /}
+#{set title:'Sign in' /}
+
+<div id="home">
+
+    <h2>regesiter</h2>
+
+    <div id="signin">
+        #{form @regesiter.regesiter()}
+            #{if flash.error}
+                <p class="error">
+                    ${flash.error}
+                </p>
+            #{/if}
+            <p>
+                <label for="id">input your id</label>
+                <input type="text" name="id" id="id">
+            </p>
+			<p>
+				<label for="accoutor">accoutor</label>
+				<input type="text" name="accoutor" id="accoutor">
+			</p>
+			<p>
+				<label for="password">password</label>
+				<input type="text" name="password" id="password">
+			</p>
+						<p>
+				<label for="name">name</label>
+				<input type="text" name="name" id="name">
+			</p>
+		    <p>
+                <label></label>
+                <input type="submit" id="enter" value="finish">
+            </p>
+        #{/form}
+    </div>
+
+</div>
