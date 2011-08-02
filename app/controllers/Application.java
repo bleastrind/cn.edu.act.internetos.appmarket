@@ -17,7 +17,15 @@ public class Application extends Controller {
         render();
     }
 
-    public static void getAccount() {
+    public static void getAccount(String account, String password) {
+        if ((account == "admin") && (password == "admin"))
+        {
+            AdminService.welcome();
+            return;
+        }
 
+        UserDao userdao = new UserDao();
+        User user = userdao.findByAccount(account);
+        UserService.welcome(user);
     }
 }
