@@ -1,4 +1,4 @@
-//package models;
+package models;
 /*
  * class for AppDao with some methods
  */
@@ -30,7 +30,7 @@ public class AppDao {
 	static final StringSerializer se = new StringSerializer();
 	static final Logger log = LoggerFactory.getLogger(AppDao.class);
 	
-	List<String> AppIds = new ArrayList<String>;//all the appid
+	final List<String> AppIds = new ArrayList<String>();
 	
 	Cluster cluster = getOrCreateCluster("Test Cluster", "127.0.0.1:9160");;
 	Keyspace ko = createKeyspace(KEYSPACE, cluster);
@@ -48,7 +48,7 @@ public class AppDao {
 			log.debug("insert execution time: {}", mr2.getExecutionTimeMicro());
 			MutationResult mr3 = m.insert(instance.getName(), cf, createColumn("name_info",instance.getInformation(),se,se));
 			log.debug("insert execution time: {}", mr3.getExecutionTimeMicro());
-			
+
 			AppIds.add(instance.getId());
 			MutationResult mr4 = m.insert("allAppIds", cf, createColumn("AppIds",listToString(AppIds),se,se));
 			log.debug("insert execution time: {}", mr4.getExecutionTimeMicro());
@@ -88,7 +88,6 @@ public void delete(App instance){
 		List<App> app_list = new ArrayList<App>();
 		for(String i:getAllAppIds())
 			app_list.add(findById(i));
-		System.out.println(app_list);
 		return app_list;
 	}
 	private List<String> getAllAppIds(){
@@ -103,7 +102,7 @@ public void delete(App instance){
 	    HColumn<String, String> c = r.get();
 	    assertNotNull(c);
 	    list = stringToList(c.getValue());
-
+		
 		return list ;		
 	}
 	
@@ -157,3 +156,4 @@ public void delete(App instance){
 		return list;
 	}
 }
+

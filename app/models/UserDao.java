@@ -1,4 +1,4 @@
-//package models;
+package models;
 
 import static me.prettyprint.hector.api.factory.HFactory.createColumn;
 import static me.prettyprint.hector.api.factory.HFactory.createColumnQuery;

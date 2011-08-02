@@ -18,14 +18,13 @@ public class Application extends Controller {
     }
 
     public static void getAccount(String account, String password) {
-        if ((account == "admin") && (password == "admin"))
-        {
-            AdminService.welcome();
-            return;
-        }
+     //   if (account.equals("admin") && password.equals("admin"))
 
-        UserDao userdao = new UserDao();
-        User user = userdao.findByAccount(account);
-        UserService.welcome(user);
+            AdminService.welcome();
+        //    return;
+        
+       // UserDao userdao = new UserDao();
+       // User user = userdao.findByAccount(account);
+       // UserService.welcome(user);
     }
 }

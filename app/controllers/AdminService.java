@@ -19,7 +19,7 @@ public class AdminService extends Controller {
           render(app);
     }
 
-    public static void editAppSave(App app, String name, String infomation){
+    public static void editAppSave(App app, String name, String information){
           AppDao appdao = new AppDao();
           app.name = name;
           app.information = information;
@@ -29,13 +29,13 @@ public class AdminService extends Controller {
 
     public static void deleteApp(App app){
           AppDao appdao = new AppDao();
-          appdao.deleteApp(appdao);
+          appdao.delete(app);
           welcome();
     }
 
     public static void addApp()
     {
-          render(app);
+          render();
     }
 
     public static void addAppSave(App app)
