@@ -55,6 +55,11 @@ public class UserDao {
 	public void delete(User instance){
 		log.debug("deleting User instance"); 
 		try{
+			//first delete the UserSpace!
+			UserSpaceDao ud = new UserSpaceDao();
+			ud.delete(ud.getUserSpace(instance));
+			
+			//Now delete the User
 			MutationResult mr = m.delete(instance.getAccount(), cf,
 					"column_id", se);
 			

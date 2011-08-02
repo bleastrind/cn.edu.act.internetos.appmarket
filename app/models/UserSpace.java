@@ -19,7 +19,6 @@ public class UserSpace {
     
 	public UserSpace(String id){
 		this.id = id;
-        //AppIds = new ArrayList<String>();
 	}
 	
 	public UserSpace(String id, List<String> AppIds){

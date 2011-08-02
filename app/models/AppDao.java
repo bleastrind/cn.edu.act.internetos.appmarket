@@ -30,6 +30,8 @@ public class AppDao {
 	static final StringSerializer se = new StringSerializer();
 	static final Logger log = LoggerFactory.getLogger(AppDao.class);
 	
+	List<String> AppIds = new ArrayList<String>;//all the appid
+	
 	Cluster cluster = getOrCreateCluster("Test Cluster", "127.0.0.1:9160");;
 	Keyspace ko = createKeyspace(KEYSPACE, cluster);
 	String cf = "AppTestTable";
@@ -46,7 +48,9 @@ public class AppDao {
 			log.debug("insert execution time: {}", mr2.getExecutionTimeMicro());
 			MutationResult mr3 = m.insert(instance.getName(), cf, createColumn("name_info",instance.getInformation(),se,se));
 			log.debug("insert execution time: {}", mr3.getExecutionTimeMicro());
-			MutationResult mr4 = m.insert("allAppIds", cf, createColumn("AppIds",listToString(instance.getAppIds()),se,se));
+			
+			AppIds.add(instance.getId());
+			MutationResult mr4 = m.insert("allAppIds", cf, createColumn("AppIds",listToString(AppIds),se,se));
 			log.debug("insert execution time: {}", mr4.getExecutionTimeMicro());
 			log.debug("save successful");
 		}catch(RuntimeException re){
@@ -80,7 +84,14 @@ public void delete(App instance){
 		}
 	}
 	
-	public List<String> getAllAppIds(){
+	public List<App> getAllApp(){
+		List<App> app_list = new ArrayList<App>();
+		for(String i:getAllAppIds())
+			app_list.add(findById(i));
+		System.out.println(app_list);
+		return app_list;
+	}
+	private List<String> getAllAppIds(){
 		List<String> list = new ArrayList<String>();
 
 		ColumnQuery<String, String, String> q = createColumnQuery(ko, se, se, se);

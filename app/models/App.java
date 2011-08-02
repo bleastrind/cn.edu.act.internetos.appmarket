@@ -14,8 +14,6 @@ public class App {
 	public String name;
 	public String information;
 	
-	public List<String> AppIds = new ArrayList<String>();
-	
 	//Construcors
 	
 	public App(){
@@ -32,7 +30,6 @@ public class App {
 		this.id = id;
 		this.name = name;
 		this.information = information;
-		this.AppIds = AppIds;
 	}
 	
 	//Property accessors
@@ -58,10 +55,4 @@ public class App {
 		this.information = information;
 	}
 	
-	public List<String> getAppIds(){
-		return this.AppIds;
-	}
-	public void setAppIds(){
-		this.AppIds.add(this.id);
-	}
 }
