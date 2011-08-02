@@ -45,6 +45,18 @@ public class UserSpaceDao {
 			throw re;
 		}
 	}
+	
+	public void delete(UserSpace us, String appid){
+		log.debug("deleting one appid of the UserSpace");
+		try{
+			us.getAppIds().remove(appid);
+			m.insert(us.getId(), cf, createColumn("column_name",listToString(us.getAppIds()),se,se));
+		}catch(RuntimeException re){
+			log.debug("delete failed");
+			throw re;
+		}
+	}
+
 	public void delete(UserSpace instance){
 		log.debug("deleting UserSpace instance");
 		try{
