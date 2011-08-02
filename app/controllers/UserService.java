@@ -10,10 +10,7 @@ import models.*;
 public class UserService extends Controller {
 
     public static void welcome(User user) {
-
+        render(user);
     }
-
-    public static void regesiter() {
-
-    }
+	
 }
