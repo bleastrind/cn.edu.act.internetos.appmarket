@@ -1,4 +1,4 @@
-//package models;
+package models;
 /*
  * User is a class of the User and for UserDao;
  */

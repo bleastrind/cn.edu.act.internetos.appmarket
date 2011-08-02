@@ -1,4 +1,4 @@
-//package models;
+package models;
 /*
  * class for AppDao with some methods
  */
@@ -80,7 +80,22 @@ public void delete(App instance){
 		}
 	}
 	
-	public List<String> getAllAppIds(){
+public List<App> getAllApps(){
+
+	List<App> list = new ArrayList<App>();
+/*	for(String appId:getAllAppIds()){
+		list.add(findById(appId));
+	}
+	return list;
+*/
+	list.add(new App("11", "12", "13"));
+	list.add(new App("21", "22", "33"));
+	list.add(new App("31", "32", "33"));
+	return list;
+	
+}
+
+private  List<String> getAllAppIds(){
 		List<String> list = new ArrayList<String>();
 
 		ColumnQuery<String, String, String> q = createColumnQuery(ko, se, se, se);

@@ -1,10 +1,11 @@
+package models;
 import java.util.List;
 import java.util.ArrayList;
 /*
  * App is a class of the Application and for AppDao;
  */
 
-//package models;
+
 
 public class App {
 

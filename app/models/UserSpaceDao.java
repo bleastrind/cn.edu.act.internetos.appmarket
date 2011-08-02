@@ -1,3 +1,4 @@
+package models;
 import static me.prettyprint.hector.api.factory.HFactory.createColumn;
 import static me.prettyprint.hector.api.factory.HFactory.createColumnQuery;
 import static me.prettyprint.hector.api.factory.HFactory.createKeyspace;
@@ -45,9 +46,10 @@ public class UserSpaceDao {
 		}
 	}
 	
-	public UserSpace getUserSpace(UserSpace user){
+	public UserSpace getUserSpace(User user){
 		log.debug("find a user");
 		try{
+                              
 			//searching the appid through the userid
 			
 			ColumnQuery<String, String, String> q = createColumnQuery(ko, se, se, se);
