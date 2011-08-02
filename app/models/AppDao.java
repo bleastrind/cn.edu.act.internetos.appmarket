@@ -60,7 +60,7 @@ public class AppDao {
 	}
 	
 
-public void delete(App instance){
+	public void delete(App instance){
 		log.debug("deleting App instance"); 
 		try{
 			MutationResult mr = m.delete(instance.getId(), cf,
