@@ -1,21 +1,7 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-<h1>Welcome to AppMarket!</h1>
-#{form @Application.show()}
-    <p>
-        <label for="account">Your account: </label>
-        <input type="text" name="account" id="account" value="${params.account}" />
-    </p>
-    <p>
-        <label for="password">Your password: </label>
-        <input type="text" name="password" id="password" value="${params.password}" />
-    </p>
-    <p>
-        <input type="submit" value="OK" />
-    </p>
-#{/form}
-
-<body>
-<a href=/regesiter>regesiter</a>
-</body>
+<h1>Welcome to the AppMarket!</h1>
+<h3>You can get nice appliacations here~</h3>
+<h5><a href = "@{Application.login()}">Click me to login!</a></h5>
+<h5><a href = "@{UserService.regesiter()}">Click me to regist!</a></h5>

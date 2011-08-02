@@ -3,6 +3,7 @@
 
 <h1>Hello Admin!You can manage every appliacation here!</h1>
 
+#{if applist.size()}
 #{list items: applist, as:'app'}
      <div>
           <span>${applist.indexOf(app)}.${app.name}</span>
@@ -17,4 +18,16 @@
           <input type = "submit" value = "delete">
      #{/form}
 #{/list}
+
+#{/if}
+#{else}
+    Sorry we have no appliacation now.
+#{/else}
+<h3>
+     #{form @AdminService.addApp()}
+          <input type = "submit" value = "Add a new app">
+     #{/form}
+</h3>
+
+
 

@@ -38,9 +38,10 @@ public class AdminService extends Controller {
           render();
     }
 
-    public static void addAppSave(App app)
+    public static void addAppSave(String id, String name, String information)
     {
           AppDao appdao = new AppDao();
+          App app = new App(id, name, information);
           appdao.save(app);     
           welcome();
     }
