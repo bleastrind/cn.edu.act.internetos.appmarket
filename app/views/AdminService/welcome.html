@@ -1,0 +1,34 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+<h1>Hello Admin!You can manage every appliacation here!</h1>
+
+#{if applist.size()}
+#{list items: applist, as:'app'}
+     <div>
+          <span>${applist.indexOf(app) + 1}.${app.name}</span>
+     </div>
+     <div>
+          Information:${app.information}
+     </div>
+     #{form @AdminService.editApp(app)}
+          <input type = "submit" value = "edit">
+     #{/form}
+     #{form @AdminService.deleteApp(app)}
+          <input type = "submit" value = "delete">
+     #{/form}
+#{/list}
+
+#{/if}
+#{else}
+    Sorry we have no appliacation now.
+#{/else}
+<h3>
+     #{form @AdminService.addApp()}
+          <input type = "submit" value = "Add a new app">
+     #{/form}
+</h3>
+<h3><a href = "@{Application.index()}">log out</a></h3>
+
+
+

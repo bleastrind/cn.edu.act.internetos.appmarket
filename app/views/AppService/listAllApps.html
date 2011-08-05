@@ -1,0 +1,22 @@
+<html>
+#{if applist.size()}
+	<h1>Apps</h1>
+    #{list items:applist, as:'app'}
+	<h2>s</h2>
+            <div class="app">
+                <div class="app-title">
+                    <h4>${applist.indexOf(app)}.${app.name}</h4>
+                </div>
+                <div class="app-info">
+                    ${app.information}
+                </div>
+				<div class="details">
+					<a href = @{AppService.listApp(app)}>details</a>
+				</div>
+            </div>
+    #{/list}
+#{/if}
+#{else}
+    <h3>There're no apps!<h3>
+#{/else}
+</html>

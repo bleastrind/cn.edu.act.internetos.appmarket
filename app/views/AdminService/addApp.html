@@ -1,0 +1,29 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+<h1>Hello Admin!You can manage every appliacation here!</h1>
+
+
+      #{form @AdminService.addAppSave()}
+     <p>
+          <label for="name">App id: </label>
+          <input type="text" name="id" id="id" value="${params.id}" />
+     </p>
+     <p>
+          <label for="name">App name: </label>
+          <input type="text" name="name" id="name" value="${params.name}" />
+     </p>
+     <p>
+          <label for="information">App information: </label>
+          <textarea name="information" id="information">${params.information}</textarea>
+    </p>
+
+          <input type = "submit" value = "save">
+
+     #{/form}
+	 <h1></h1>
+	#{form @AdminService.welcome()}
+		<input type = "submit" value = "back">
+	#{/form}	 
+   
+

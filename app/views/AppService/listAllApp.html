@@ -1,0 +1,27 @@
+<html>
+#{if applist.size()}
+	<h1>Your apps are:</h1>
+    #{list items:applist, as:'app'}
+            <div class="app">
+                <div class="app-title">
+                    <h4>${applist.indexOf(app) + 1}.${app.name}</h4>
+                </div>
+                <div class="app-info">
+				<h3>Information:
+                     ${app.information}</h3>
+                </div>
+				#{form @AppService.deleteUserApp(app)}
+					<input type = "submit" value = "delete">
+				#{/form}
+
+            </div>
+    #{/list}
+#{/if}
+#{else}
+    <h3>You have got no app!<h3>
+#{/else}
+</html>
+<h5><a href = "@{AppService.addUserApp()}">Click me to add more!</a></h5>
+#{form @UserService.welcome()}
+	<input type = "submit" value = "back">
+#{/form}
