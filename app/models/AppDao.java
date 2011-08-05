@@ -115,7 +115,7 @@ public class AppDao {
 	        .execute();
 	    assertNotNull(r);
 	    HColumn<String, String> c = r.get();
-	    assertNotNull(c);
+
 	    if (c != null)
 	    list = stringToList(c.getValue());
 		
