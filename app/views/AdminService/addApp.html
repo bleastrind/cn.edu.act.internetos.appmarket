@@ -4,7 +4,7 @@
 <h1>Hello Admin!You can manage every appliacation here!</h1>
 
 
-      #{form @AdminService.addAppSave()}
+      #{form @AdminController.addAppSave()}
      <p>
           <label for="name">App id: </label>
           <input type="text" name="id" id="id" value="${params.id}" />
@@ -22,7 +22,7 @@
 
      #{/form}
 	 <h1></h1>
-	#{form @AdminService.welcome()}
+	#{form @AdminController.welcome()}
 		<input type = "submit" value = "back">
 	#{/form}	 
    

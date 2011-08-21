@@ -11,10 +11,10 @@
      <div>
           Information:${app.information}
      </div>
-     #{form @AdminService.editApp(app)}
+     #{form @AdminController.editApp(app)}
           <input type = "submit" value = "edit">
      #{/form}
-     #{form @AdminService.deleteApp(app)}
+     #{form @AdminController.deleteApp(app)}
           <input type = "submit" value = "delete">
      #{/form}
 #{/list}
@@ -24,7 +24,7 @@
     Sorry we have no appliacation now.
 #{/else}
 <h3>
-     #{form @AdminService.addApp()}
+     #{form @AdminController.addApp()}
           <input type = "submit" value = "Add a new app">
      #{/form}
 </h3>

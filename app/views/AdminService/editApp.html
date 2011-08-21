@@ -10,7 +10,7 @@
      <div>
           Information:${app.information}
      </div>
-     #{form @AdminService.editAppSave(app)}
+     #{form @AdminController.editAppSave(app)}
      <p>
           <label for="name">App name: </label>
           <input type="text" name="name" id="name" value="${params.name}" />
@@ -22,7 +22,7 @@
 
           <input type = "submit" value = "save">
      #{/form}
-	 	#{form @AdminService.welcome()}
+	 	#{form @AdminController.welcome()}
 		<input type = "submit" value = "back">
 	#{/form}	
    

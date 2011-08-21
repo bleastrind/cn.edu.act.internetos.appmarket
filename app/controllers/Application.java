@@ -19,15 +19,13 @@ public class Application extends Controller {
 
     public static void getAccount(String account, String password) {
         if (account.equals("admin") && password.equals("admin"))
-
-            AdminService.welcome();
+            AdminController.welcome();
 	    else
 	    {        
             UserDao userdao = new UserDao();
             User user = userdao.findByAccount(account);
 			Cache.set(session.getId() + "-users", user, "30mn");
-			System.out.println(user);
-            UserService.welcome();
+            UserController.welcome();
         }
     }
 }

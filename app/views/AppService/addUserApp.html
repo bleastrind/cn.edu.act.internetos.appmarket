@@ -9,9 +9,9 @@
           <span>${applist.indexOf(app) + 1}.${app.name}</span>
      </div>
 	<div class="details">
-		<a href = @{AppService.listApp(app)}>details</a>
+		<a href = @{AppController.listApp(app)}>details</a>
 	</div>
-      #{form @AppService.addUserAppSave(app)}
+      #{form @AppController.addUserAppSave(app)}
           <input type = "submit" value = "add">
      #{/form}
 #{/list}
@@ -21,7 +21,7 @@
     Sorry we have no appliacation now.
 #{/else}
 <h1></h1>
-#{form @AppService.listAllApp()}
+#{form @AppController.listAllApp()}
 	<input type = "submit" value = "back">
 #{/form}
 
