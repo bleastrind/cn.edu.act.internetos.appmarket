@@ -30,10 +30,11 @@ public class AppService{
 	}
 	
 	
-    public static List<App> getAllApps() {
-          AppDao appdao = new AppDao();	
-          List<App> applist = appdao.getAllApps();          
-          return applist;		  
+    public static List<App> getAllApps()  
+	{
+        AppDao appdao = new AppDao();	
+        List<App> applist = appdao.getAllApps();     
+        return applist;		  
     }
 	
 	public static boolean addUserApp(App app, User user)

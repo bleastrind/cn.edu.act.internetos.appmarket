@@ -10,7 +10,7 @@
 				<h3>Information:
                      ${app.information}</h3>
                 </div>
-				#{form @AppService.deleteUserApp(app)}
+				#{form @AppController.deleteUserApp(app)}
 					<input type = "submit" value = "delete">
 				#{/form}
 
@@ -21,7 +21,7 @@
     <h3>You have got no app!<h3>
 #{/else}
 </html>
-<h5><a href = "@{AppService.addUserApp()}">Click me to add more!</a></h5>
-#{form @UserService.welcome()}
+<h5><a href = "@{AppController.addUserApp()}">Click me to add more!</a></h5>
+#{form @UserController.welcome()}
 	<input type = "submit" value = "back">
 #{/form}

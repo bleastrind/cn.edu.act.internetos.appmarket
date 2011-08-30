@@ -22,14 +22,16 @@ public class AppController extends Controller {
 	
 	public static void listAllApp(){
 		User user = Cache.get(session.getId() + "-users", User.class);
-		render(AppService.getAllApp(user));
+		List<App> applist = AppService.getAllApp(user);
+		render("AppService/listAllApp.html", applist);
 	}
 	
 	
 	public static void addUserApp()
 	{
 		User user = Cache.get(session.getId() + "-users", User.class);
-		render(AppService.getAllApps());
+		List<App> applist = AppService.getAllApps();
+		render("AppService/addUserApp.html", applist);
 	}
 	
 	public static void addUserAppSave(App app)
@@ -49,7 +51,7 @@ public class AppController extends Controller {
 	}
 	
 	public static void listApp(App app){		
-		render (app);
+		render ("AppService/listApp.html", app);
 	}
 	
 }

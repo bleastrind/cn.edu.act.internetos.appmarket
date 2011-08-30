@@ -8,12 +8,13 @@ import models.*;
 
 public class AdminController extends Controller {
 
-    public static void welcome() {       
-        render(AppService.getAllApps());
+    public static void welcome() {   
+		List<App> applist = AppService.getAllApps();
+        render("AdminService/welcome.html", applist);
     }
 
     public static void editApp(App app){
-        render(app);
+        render("AdminService/editApp.html", app);
     }
 
     public static void editAppSave(App app, String name, String information){
@@ -28,7 +29,7 @@ public class AdminController extends Controller {
 
     public static void addApp()
     {
-        render();
+        render("AdminService/addApp.html");
     }
 
     public static void addAppSave(String id, String name, String information)

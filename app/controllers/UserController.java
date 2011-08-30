@@ -11,7 +11,7 @@ public class UserController extends Controller {
 
     public static void welcome() {
 		User user = Cache.get(session.getId() + "-users", User.class);
-        render(user);
+        render("UserService/welcome.html", user);
     }
 	
 }
