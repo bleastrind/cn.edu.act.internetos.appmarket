@@ -14,7 +14,8 @@ public class App {
 	public String id;
 	public String name;
 	public String information;
-	
+	public String rank;
+	//pic 
 	//Construcors
 	
 	public App(){
@@ -25,6 +26,13 @@ public class App {
 		this.id = id;
 		this.name = name;
 		this.information = information;
+	}
+	
+	public App(String id, String name, String information,String rank){
+		this.id = id;
+		this.name = name;
+		this.information = information;
+		this.rank = rank;
 	}
 	
 	public App(String id, String name, String information, List<String> AppIds){
@@ -56,4 +64,11 @@ public class App {
 		this.information = information;
 	}
 	
+	public String getRank(){
+		return this.rank;
+	}
+	
+	public void setRank(String rank){
+		this.rank = rank;
+	}
 }

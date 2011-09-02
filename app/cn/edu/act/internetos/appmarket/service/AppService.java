@@ -65,4 +65,57 @@ public class AppService{
 		userspace.AppIds = temp;
 		userspacedao.save(userspace);
 	}
+	
+	public static List<App> listAppByRank(){
+		AppDao appdao = new AppDao();
+		List<App> apps = appdao.getAllApps();
+		List<App> appList = new ArrayList<App>();
+		int j = 0;
+		for (App i:apps)
+		{
+			j++;
+			for (App app:apps)
+			{
+				if (Integer.parseInt(app.rank)==j) appList.add(app);
+			}
+		}
+		
+		return appList;
+	}
+	
+	
+	public static List<String> listAppByUser(User user) throws Exception{
+		FavorDao favordao = new FavorDao();
+		Favor favor = favordao.getFavor(user);
+		List<String> temp = favor.Address;
+		
+		return temp;
+	}
+	
+	public static List<App> listAppByTags(Tags tags){
+	
+		AppDao appdao = new AppDao();
+		TagsDao tagsdao = new TagsDao();
+		List<App> apps = appdao.getAllApps();
+		List<App> appList = new ArrayList<App>();
+		for (App app:apps)
+		{
+			Tags app_tags = tagsdao.getTags(app);
+			boolean out_flag = true;
+			for (String i:tags.tags)
+			{
+				boolean flag = false;
+				for (String j:app_tags.tags)
+				{
+					if (i==j) {flag = true;break;}
+				}
+				if (flag==true) continue; else out_flag = false; 
+			}
+			
+			if (out_flag == true) appList.add(app);
+		}
+		
+		return appList;
+	}
+	
 }

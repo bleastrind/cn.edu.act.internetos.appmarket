@@ -17,7 +17,7 @@ public class AppController extends Controller {
 	}
 
     public static void index() {
-        render();
+        render("AppService/index.html");
     }
 	
 	public static void listAllApp(){
@@ -25,6 +25,19 @@ public class AppController extends Controller {
 		List<App> applist = AppService.getAllApp(user);
 		render("AppService/listAllApp.html", applist);
 	}
+	
+	public static void listAppByTags(){
+		User user = Cache.get(session.getId() + "-users", User.class);
+		Tags tags = new Tags();
+		List<App> applist = AppService.listAppByTags(tags);
+		render("AppService/listAllApp.html",applist);
+	}
+	
+	public static void listAppByRank(){
+		List<App> applist = AppService.listAppByRank();
+		render("AppService/listAllApp.html",applist);
+	}
+	
 	
 	
 	public static void addUserApp()
