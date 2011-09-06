@@ -1,0 +1,14 @@
+connect localhost/9160;
+create keyspace Keyspace1;
+use Keyspace1;
+create column family UserTestTable; 
+set UserTestTable['123']['column_id'] = '123';
+set UserTestTable['123']['column_account'] = '123';
+set UserTestTable['123']['column_password'] = '123';
+set UserTestTable['123']['column_name'] = '123';
+create column family UserSpaceTestTable;
+set UserSpaceTestTable['123']['column_name'] = '123';
+create column family AppTestTable;
+set AppTestTable['123']['column_name'] = '123';
+set AppTestTable['123']['column_info'] = '123';
+set AppTestTable['123']['name_info'] = '123';
