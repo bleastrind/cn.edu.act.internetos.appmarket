@@ -6,15 +6,15 @@
 #{if applist.size()}
 #{list items: applist, as:'app'}
      <div>
-          <span>${applist.indexOf(app) + 1}.${app.name}</span>
+          <span>${applist.indexOf(app) + 1}.${app.getName()}</span>
      </div>
      <div>
-          Information:${app.information}
+          Information:${app.getInformation()}
      </div>
      #{form @AdminController.editApp(app)}
           <input type = "submit" value = "edit">
      #{/form}
-     #{form @AdminController.deleteApp(app)}
+     #{form @AdminController.deleteApp(app, app.getId())}
           <input type = "submit" value = "delete">
      #{/form}
 #{/list}

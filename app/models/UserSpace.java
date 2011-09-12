@@ -7,43 +7,34 @@ import java.util.*;
  */
 
 public class UserSpace {
-	//Fields
-	
-	public String id;
-    public List<String> AppIds = new ArrayList<String>();
+	//Fields	
+	private String id;
+    private List<AppConfig> appConfigs;
 
-    //Constructors
-    public UserSpace(){
-    	
-    }
-    
+    //Constructors  
 	public UserSpace(String id){
 		this.id = id;
-		AppIds = new ArrayList<String>();
+		appConfigs = new ArrayList<AppConfig>();
 	}
 	
-	public UserSpace(String id, List<String> AppIds){
+
+	public UserSpace(String id, List<AppConfig> appConfigs){
 		this.id = id;
-		this.AppIds = AppIds;
+		this.appConfigs = appConfigs;
 	}
 	
-	//Property Accessors
-	
+	//Property Accessors	
 	public String getId(){
 		return this.id;
 	}
 	public void setId(String id){
 		this.id = id;
+	}	
+	public List<AppConfig> getAppConfigs(){
+		return this.appConfigs;
 	}
-	
-	public List<String> getAppIds(){
-		return this.AppIds;
-	}
-	public void setAppIds(String appid){
-		this.AppIds.add(appid);
-	}
-	public void setAppIds(List<String> list){
-		this.AppIds = list;
+	public void setAppConfigs(List<AppConfig> appConfigs){
+		this.appConfigs = appConfigs;
 	}
 	
 }

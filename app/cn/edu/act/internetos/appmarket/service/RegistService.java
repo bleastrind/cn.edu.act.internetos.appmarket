@@ -5,12 +5,12 @@ import models.*;
 
 public class RegistService{
 
-	public static void regist(String id, String account, String password, String name){
-		User user = new User(id, account, password, name);	
+	public static void regist(String account, String password, String name){
+		User user = new User(account, password, name);	
 		UserDao userdao = new UserDao();	
 		userdao.save(user);
 
-		UserSpace userspace = new UserSpace(id);
+		UserSpace userspace = new UserSpace(user.getId());
 		UserSpaceDao userspacedao = new UserSpaceDao();
 		userspacedao.save(userspace);
 	}

@@ -12,8 +12,8 @@ public class RegisterController extends Controller {
         render("Register/index.html");
     }
 	
-	public static void regist(String id, String account, String password, String name){
-		RegistService.regist(id, account, password, name);
+	public static void regist(String account, String password, String name){
+		RegistService.regist(account, password, name);
 		if (true) render("Register/success.html");
 		else render("Register/success.html");
 	}

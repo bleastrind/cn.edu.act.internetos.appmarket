@@ -22,9 +22,15 @@ public class AdminController extends Controller {
         welcome();       
     }
 
-    public static void deleteApp(App app){
-        AdminService.deleteApp(app);
-        welcome();
+    public static void deleteApp(App app, String appId){
+	//		System.out.println(app.getId());
+	//		System.out.println(appId);			
+	//		System.out.println(app.getName());
+	//		System.out.println(app.getInformation());
+		app.setId(appId);
+	///	app.getId().equals("");
+		AdminService.deleteApp(app);
+		welcome();
     }
 
     public static void addApp()
@@ -32,9 +38,9 @@ public class AdminController extends Controller {
         render("AdminService/addApp.html");
     }
 
-    public static void addAppSave(String id, String name, String information)
+    public static void addAppSave(String name, String information)
     {
-		AdminService.addAppSave(id, name, information);
+		AdminService.addAppSave(name, information, "TEST URL");
         welcome();
     }
 }

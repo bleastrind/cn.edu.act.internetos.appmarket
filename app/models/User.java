@@ -3,31 +3,25 @@ package models;
  * User is a class of the User and for UserDao;
  */
 import java.io.*;
+import java.util.UUID;
 public class User implements Serializable{
 	//Fields
 	
-	public String id;
-	public String account;
-	public String password;
-	public String name;
+	private String id;
+	private String account;
+	private String password;
+	private String name;
 
 	
 	//Constructors
-	public User(){
-		
-	}
-	public User(String id, String account){
-		this.id = id;
-		this.account = account;		
-	}
-	public User(String id, String account, String password){
+	public User(String id, String account, String password, String name){
 		this.id = id;
 		this.account = account;
 		this.password = password;
+		this.name = name;
 	}
-	
-	public User(String id, String account, String password, String name){
-		this.id = id;
+	public User(String account, String password, String name){
+		this.id = UUID.randomUUID().toString();
 		this.account = account;
 		this.password = password;
 		this.name = name;
@@ -37,10 +31,6 @@ public class User implements Serializable{
 	public String getId(){
 		return this.id;
 	}
-	public void setId(String id){
-		this.id = id;
-	}
-	
 	public String getAccount(){
 		return this.account;
 	}
