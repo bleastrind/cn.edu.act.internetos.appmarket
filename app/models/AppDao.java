@@ -44,10 +44,6 @@ public class AppDao {
 	
 	public List<App> getAllApps()
 	{
-		List<App> appList = new ArrayList<App>();
-		ColumnQuery<String, String, String> columnQuery = createStringColumnQuery(keyspace);
-		columnQuery.setColumnFamily(CF);
-		
 		RangeSlicesQuery<String, String, String> rangeSlicesQuery = createRangeSlicesQuery(keyspace, se, se, se);
 		rangeSlicesQuery.setColumnFamily(CF);
 		rangeSlicesQuery.setRange("", "", false, 100);
@@ -56,6 +52,11 @@ public class AppDao {
 		OrderedRows<String, String, String> orderedRows = result.get();
 		List<Row<String, String, String>> rows = orderedRows.getList();
 		
+		List<App> appList = new ArrayList<App>();
+		ColumnQuery<String, String, String> columnQuery = createStringColumnQuery(keyspace);
+		// I suppose this can be removed or you don't have to setCF again in the loop body: 
+		// columnQuery.setColumnFamily(CF);
+	
 		for(Row<String, String, String> row: rows)
 		{
 			ColumnQuery<String, String, String> rowQuery = columnQuery.setColumnFamily(CF).setKey(row.getKey());
