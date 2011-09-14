@@ -15,7 +15,7 @@ public class AdminService{
 
     public static void deleteApp(App app){
 	AppDao appdao = new AppDao();
-	if(!app.getId().equals(""))
+	if(!app.getId().isEmpty())
 		appdao.delete(app);
     }
 
