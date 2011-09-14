@@ -47,7 +47,7 @@ public class AppDao {
 		List<App> appList = new ArrayList<App>();
 		ColumnQuery<String, String, String> columnQuery = createStringColumnQuery(keyspace);
 		columnQuery.setColumnFamily(CF);
-		App temp;
+		
 		RangeSlicesQuery<String, String, String> rangeSlicesQuery = createRangeSlicesQuery(keyspace, se, se, se);
 		rangeSlicesQuery.setColumnFamily(CF);
 		rangeSlicesQuery.setRange("", "", false, 100);
@@ -55,25 +55,30 @@ public class AppDao {
 		QueryResult<OrderedRows<String, String, String>> result = rangeSlicesQuery.execute();
 		OrderedRows<String, String, String> orderedRows = result.get();
 		List<Row<String, String, String>> rows = orderedRows.getList();
+		
 		for(Row<String, String, String> row: rows)
 		{
-			if (columnQuery.setKey(row.getKey()).setName("name").execute().get() == null)
-				continue;
-			temp = new App(row.getKey(),
-							columnQuery.setColumnFamily(CF).setKey(row.getKey()).setName("name").execute().get().getValue(),
-							columnQuery.setColumnFamily(CF).setKey(row.getKey()).setName("information").execute().get().getValue(),
-							columnQuery.setColumnFamily(CF).setKey(row.getKey()).setName("installUrl").execute().get().getValue());
-			appList.add(temp);
+			ColumnQuery<String, String, String> rowQuery = columnQuery.setColumnFamily(CF).setKey(row.getKey());
+			if (rowQuery.setName("name").execute().get() != null){
+				App temp = new App(row.getKey(),
+					rowQuery.setName("name").execute().get().getValue(),
+					rowQuery.setName("information").execute().get().getValue(),
+					rowQuery.setName("installUrl").execute().get().getValue()
+				);
+				appList.add(temp);
+			}
 		}
 		return appList;		
 	}	
 	public App findById(String id)
 	{
 		ColumnQuery<String, String, String> columnQuery = createStringColumnQuery(keyspace);
+		ColumnQuery<String, String, String> rowQuery = columnQuery.setColumnFamily(CF).setKey(id);
 		App app = new App(id,
-						columnQuery.setColumnFamily(CF).setKey(id).setName("name").execute().get().getValue(),
-						columnQuery.setColumnFamily(CF).setKey(id).setName("information").execute().get().getValue(),
-						columnQuery.setColumnFamily(CF).setKey(id).setName("installUrl").execute().get().getValue());
+			rowQuery.setName("name").execute().get().getValue(),
+			rowQuery.setName("information").execute().get().getValue(),
+			rowQuery.setName("installUrl").execute().get().getValue()
+		);
 		return app;
 	}
 }
