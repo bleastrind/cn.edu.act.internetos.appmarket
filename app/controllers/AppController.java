@@ -20,10 +20,15 @@ public class AppController extends Controller {
         render("AppService/index.html");
     }
 	
+	public static void listAllApps(){
+		List<App> applist = AppService.getAllApps();
+        render("AppService/listAllApps.html", applist);
+	}
+	
 	public static void listAllApp(){
 		User user = Cache.get(session.getId() + "-users", User.class);
 		List<App> applist = AppService.getAllApp(user);
-		render("AppService/listAllApp.html", applist);
+		render("AppService/listAllApp.html", applist,user);
 	}
 	
 	public static void addUserApp()

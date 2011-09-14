@@ -54,20 +54,30 @@ public class AppService{
 	
 	public static void deleteUserApp(App app, User user)
 	{
-		user.getId();
 		UserSpaceDao userspacedao = new UserSpaceDao();	
 		UserSpace userspace = userspacedao.getUserSpace(user);
 		List<AppConfig> temp = userspace.getAppConfigs();	
-		temp.size();
-		userspace.getId();
-		System.out.println(userspace.getAppConfigs().size());
+		/*
 		for (AppConfig appConfig: userspace.getAppConfigs())
 		{
+			System.out.println("******************************");
 			if (appConfig.getAppId().equals(app.getId()))
 			{
 				temp.remove(appConfig);
 			}
 		}
+		*/
+		
+		for (int i = 0; i < userspace.getAppConfigs().size(); i++)
+		{
+			if (userspace.getAppConfigs().get(i).getAppId().equals(app.getId()))
+			{
+				temp.remove(userspace.getAppConfigs().get(i));
+			}
+		}
+
+		
+		
 		userspace.setAppConfigs(temp);
 		userspacedao.save(userspace);
 
