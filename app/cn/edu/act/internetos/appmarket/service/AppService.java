@@ -9,8 +9,7 @@ public class AppService{
 		UserSpaceDao userspacedao = new UserSpaceDao();
 		AppDao appdao = new AppDao();
 	    boolean flag; 
-		UserSpace userspace = userspacedao.getUserSpace(user);
-		
+		UserSpace userspace = userspacedao.getUserSpace(user);		
  		List<App> applist = new ArrayList<App>();
 		for (AppConfig appconfig: userspace.getAppConfigs())
 		{
@@ -19,11 +18,9 @@ public class AppService{
 			flag = false;
 			for (App app: applist)
 				if ((app.getId().equals(appconfig.appId)) || (app.getName().equals(appdao.findById(appconfig.getAppId()).getName())))
-				{
 					flag = true;
-				}
-				if (flag)
-					continue;
+			if (flag)
+				continue;
 			applist.add(appdao.findById(appconfig.appId));
 		}
 		return applist;
@@ -57,29 +54,25 @@ public class AppService{
 		UserSpaceDao userspacedao = new UserSpaceDao();	
 		UserSpace userspace = userspacedao.getUserSpace(user);
 		List<AppConfig> temp = userspace.getAppConfigs();	
+		//The code above is correct in logic, but leaves a ConcurrentModificationException while testing.
+		//What's more, amount many existed apps, the exception only occurs when deleting the last one!
 		/*
 		for (AppConfig appConfig: userspace.getAppConfigs())
 		{
-			System.out.println("******************************");
 			if (appConfig.getAppId().equals(app.getId()))
 			{
 				temp.remove(appConfig);
 			}
 		}
-		*/
-		
+		*/		
 		for (int i = 0; i < userspace.getAppConfigs().size(); i++)
 		{
 			if (userspace.getAppConfigs().get(i).getAppId().equals(app.getId()))
 			{
 				temp.remove(userspace.getAppConfigs().get(i));
 			}
-		}
-
-		
-		
+		}		
 		userspace.setAppConfigs(temp);
 		userspacedao.save(userspace);
-
 	}		
 }

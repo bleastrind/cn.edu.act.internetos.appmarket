@@ -53,10 +53,7 @@ public class AppDao {
 		List<Row<String, String, String>> rows = orderedRows.getList();
 		
 		List<App> appList = new ArrayList<App>();
-		ColumnQuery<String, String, String> columnQuery = createStringColumnQuery(keyspace);
-		// I suppose this can be removed or you don't have to setCF again in the loop body: 
-		// columnQuery.setColumnFamily(CF);
-	
+		ColumnQuery<String, String, String> columnQuery = createStringColumnQuery(keyspace);	
 		for(Row<String, String, String> row: rows)
 		{
 			ColumnQuery<String, String, String> rowQuery = columnQuery.setColumnFamily(CF).setKey(row.getKey());

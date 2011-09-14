@@ -39,7 +39,7 @@ public class UserDao {
 		m.delete(instance.getId(), CF, null, se);
 	}
 	
-public User findByAccount(String account){
+	public User findByAccount(String account){
 		User user = null;
 		IndexedSlicesQuery<String, String, String> indexedSlicesQuery = createIndexedSlicesQuery(keyspace, se, se, se);
 		indexedSlicesQuery.addEqualsExpression("account", account);
