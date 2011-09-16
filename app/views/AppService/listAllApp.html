@@ -10,6 +10,7 @@
                 <th>Name</th>
                 <th>information</th>
 				<th>Action</th>
+				<th>Config</th>	
             </tr>
         </thead>
         <tbody>
@@ -20,6 +21,7 @@
                     <td>
                         <a href="@{AppController.deleteUserApp(app)}">Delete The App</a>
                     </td>
+					<td>${configlist.get(applist.indexOf(app)).getConfig()}</td>
                 </tr>
             #{/list}
         </tbody>

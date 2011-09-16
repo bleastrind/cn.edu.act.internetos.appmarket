@@ -40,11 +40,9 @@ public class UserSpaceDao {
 	}
 	
 	public UserSpace getUserSpace(User user){
-		List<AppConfig> appConfigs = new ArrayList<AppConfig>();
-		
+		List<AppConfig> appConfigs = new ArrayList<AppConfig>();		
 		SliceQuery<String, String, String> sliceQuery = createSliceQuery(keyspace, se, se, se);
 		sliceQuery.setColumnFamily(CF);
-		user.getId();
 		sliceQuery.setKey(user.getId());
 		sliceQuery.setRange("", "", false, 100);
 		QueryResult<ColumnSlice<String, String>> result = sliceQuery.execute();
@@ -54,6 +52,22 @@ public class UserSpaceDao {
 		}
 		
 		UserSpace userspace = new UserSpace(user.getId(), appConfigs);
+		return userspace;		
+	}
+
+	public UserSpace getUserSpace(String userId){
+		List<AppConfig> appConfigs = new ArrayList<AppConfig>();		
+		SliceQuery<String, String, String> sliceQuery = createSliceQuery(keyspace, se, se, se);
+		sliceQuery.setColumnFamily(CF);
+		sliceQuery.setKey(userId);
+		sliceQuery.setRange("", "", false, 100);
+		QueryResult<ColumnSlice<String, String>> result = sliceQuery.execute();
+		for (HColumn<String, String> column: result.get().getColumns())
+		{
+			appConfigs.add(new AppConfig(column.getName(), column.getValue()));
+		}
+		
+		UserSpace userspace = new UserSpace(userId, appConfigs);
 		return userspace;		
 	}
 }

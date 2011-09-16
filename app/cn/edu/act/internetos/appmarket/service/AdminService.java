@@ -5,11 +5,11 @@ import models.*;
 
 public class AdminService{
 
-    public static void saveApp(App app, String name, String information){
+    public static void saveApp(App app, String name, String information, String installUrl){
 		AppDao appdao = new AppDao();
 		app.setName(name);
 		app.setInformation(information);
-		app.setInstallUrl("TEST URL");
+		app.setInstallUrl(installUrl);
 		appdao.save(app);        
     }
 

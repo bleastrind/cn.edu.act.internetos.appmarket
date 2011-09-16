@@ -26,6 +26,13 @@ public class AppService{
 		return applist;
 	}
 	
+	public static List<AppConfig> getAllConfig(User user){
+		UserSpaceDao userspacedao = new UserSpaceDao();
+		UserSpace userspace = userspacedao.getUserSpace(user);	
+		return userspace.getAppConfigs();
+	
+	}
+	
 	
     public static List<App> getAllApps()  
 	{
@@ -75,4 +82,17 @@ public class AppService{
 		userspace.setAppConfigs(temp);
 		userspacedao.save(userspace);
 	}		
+	
+	public static void setConfig(String userId, String appId, String config)
+	{
+		UserSpaceDao userspacedao = new UserSpaceDao();
+		UserSpace userspace = userspacedao.getUserSpace(userId);
+		List<AppConfig> temp = userspace.getAppConfigs();
+		for (AppConfig appConfig: userspace.getAppConfigs())
+			if (appConfig.getAppId().equals(appId))
+				temp.remove(appConfig);
+		temp.add(new AppConfig(appId, config));
+		userspace.setAppConfigs(temp);
+		userspacedao.save(userspace);		
+	}
 }

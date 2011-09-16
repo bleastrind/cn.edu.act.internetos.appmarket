@@ -4,7 +4,12 @@
 <p>${app.name}</p>
 <h3>App information:</h3>
 <p>${app.information}</p>
-<h3><a href = "@{AppController.addUserAppSave(app)}">add it to your application</a></h3>
+<form ACTION = "${app.installUrl}", >
+	<input type="hidden" name="userId" value="${user.getId()}">
+	<input type="hidden" name="appId" value="${app.getId()}">
+	<input type="hidden" name="requestUrl" value="http://localhost:9000/appcontroller/installConfig">
+	<input type="submit" id="ok" value="Install and config the application!">
+</form>
 
 
 </html>
