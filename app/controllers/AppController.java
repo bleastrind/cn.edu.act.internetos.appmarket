@@ -4,6 +4,7 @@ import cn.edu.act.internetos.appmarket.service.*;
 import play.*;
 import play.mvc.*;
 import play.cache.*;
+import play.mvc.Http.*;
 import java.util.*;
 import models.*;
 
@@ -64,4 +65,5 @@ public class AppController extends Controller {
 		AppService.setConfig(userId, appId, config);
 		render("AppService/SetConfigSuccess.html");
 	}
+
 }
